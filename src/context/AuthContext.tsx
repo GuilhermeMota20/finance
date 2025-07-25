@@ -8,7 +8,7 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isAuth, setIsAuth] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [loginError, setLoginError] = useState<boolean | undefined>(undefined);
 
   const provider = new GoogleAuthProvider();
@@ -18,11 +18,9 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     try {
       setLoading(true);
       const result = await signInWithPopup(auth, provider);
-      console.log("Usuário logado com popup:", result?.user);
       setUser(result?.user);
       setIsAuth(true);
     } catch (error) {
-      console.error("Erro no login com popup:", error);
       setUser(null);
       setLoginError(true);
       setIsAuth(false);
@@ -32,9 +30,9 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const Logout = async () => {
+    await signOut(auth);
     setUser(null);
-    signOut(auth);
-    window.location.href = '/';
+    setIsAuth(false);
   };
 
   useEffect(() => {

@@ -9,16 +9,9 @@ import {
   Stack,
   Typography
 } from "@mui/material";
-import { useBackdropLoading } from "@stores/backdrop-loading";
-import { useEffect } from "react";
 
 export const Login = () => {
   const { loading, SignInWithGoogle, loginError } = useAuth();
-  const { setOpenStates } = useBackdropLoading((state) => state);
-
-  useEffect(() => {
-    setOpenStates([loading]);
-  }, [loading]);
 
   return (
     <>

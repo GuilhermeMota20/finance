@@ -1,5 +1,4 @@
 import { AppBarCustom } from '@components/app-bar-custom';
-import { BackdropCustom } from '@components/backdrop-custom';
 import {
   Box,
   CssBaseline,
@@ -18,7 +17,6 @@ export const DashboardLayout: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <>
-      <BackdropCustom />
       <ModalProvider />
 
       <Box display="flex">

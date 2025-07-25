@@ -1,34 +1,18 @@
+import { BackdropCustom } from "@components/backdrop-custom";
+import { useAuth } from "@context/AuthContext";
 import { ReactNode, useMemo } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { useAuth } from "@context/AuthContext";
 
-interface ProtectedRouteProps {
-  children: ReactNode;
-}
-
-export function ProtectedRoute({ children }: ProtectedRouteProps) {
+export function ProtectedRoute({ children }: { children: ReactNode }) {
   const { user, loading } = useAuth();
   const { pathname } = useLocation();
 
-  // Rotas que não exigem autenticação
-  const openRoutes = useMemo(() => ["/", "/register", "/forgot-password"], []);
+  const openRoutes = useMemo(() => ["/"], []);
   const isOpenRoute = openRoutes.includes(pathname);
 
-  // Enquanto carrega, evita piscar
-  if (loading) {
-    return null; // Ou um componente <Loader /> personalizado
-  }
+  if (loading) return <BackdropCustom open={true} />;
+  if (!user && !isOpenRoute) return <Navigate to="/" replace />;
+  if (user && isOpenRoute) return <Navigate to="/dashboard" replace />;
 
-  // Usuário não autenticado e rota protegida
-  if (!user && !isOpenRoute) {
-    return <Navigate to="/" replace />;
-  }
-
-  // Usuário logado e tentando acessar rota pública
-  if (user && isOpenRoute) {
-    return <Navigate to="/dashboard" replace />;
-  }
-
-  // Caso válido, renderiza a página
   return <>{children}</>;
 }

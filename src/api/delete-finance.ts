@@ -29,7 +29,6 @@ export const useDeleteFinanceApi = () => {
       return { success: true };
 
     } catch (error) {
-      console.error("Erro ao excluir finance:", error);
       return { success: false, error: `Erro ao excluir finance: ${error}` };
     };
   };

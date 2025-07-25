@@ -1,19 +1,16 @@
-import { Backdrop, Card, CircularProgress } from "@mui/material";
-import { useBackdropLoading } from "@stores/backdrop-loading";
+import { Backdrop, Card, CircularProgress, Typography } from "@mui/material";
 import { SxBackdropCustom, SxIcon, SxIconContainer } from "./styles";
+import { BackdropCustomProps } from "./types";
 
-export const BackdropCustom: React.FC = () => {
-  const { openStates } = useBackdropLoading((state) => state);
-
-  if (!openStates?.length) return;
-
-  const open = openStates?.some((state) => state === true);
+export const BackdropCustom: React.FC<BackdropCustomProps> = ({ open = false }) => {
+  if (!open) return;
 
   return (
     <>
       <Backdrop sx={SxBackdropCustom} open={open} >
         <Card sx={SxIconContainer} >
           <CircularProgress sx={SxIcon} />
+          <Typography>Carregando...</Typography>
         </Card>
       </Backdrop>
     </>

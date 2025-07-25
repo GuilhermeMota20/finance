@@ -1,3 +1,3 @@
 export type BackdropCustomProps = {
-  openStates?: boolean[];
+  open?: boolean;
 }

@@ -1,9 +1,8 @@
 import { Logo } from "@components/logo";
 import { useAuth } from "@context/AuthContext";
 import { AppBar, Box, Toolbar, useTheme } from "@mui/material";
-import { ButtonRefresh } from "../button-refresh/button-refresh";
-import { ButtonToggleTheme } from "../button-toggle-theme";
-import { ButtonUser } from "../button-user";
+import { ButtonToggleTheme } from "@components/button-toggle-theme";
+import { ButtonUser } from "@components/button-user";
 import { SxAppBarCustom } from "./styles";
 import type { AppBarCustomProps } from "./types";
 
@@ -39,7 +38,6 @@ export const AppBarCustom: React.FC<AppBarCustomProps> = () => {
                 justifyContent="end"
                 gap={2}
               >
-                <ButtonRefresh />
                 <ButtonToggleTheme />
                 <ButtonUser data={user} />
               </Box>
@@ -62,7 +60,6 @@ export const AppBarCustom: React.FC<AppBarCustomProps> = () => {
                 justifyContent="end"
                 gap={2}
               >
-                <ButtonRefresh />
                 <ButtonToggleTheme />
               </Box>
             </Toolbar>

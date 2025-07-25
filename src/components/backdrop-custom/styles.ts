@@ -6,6 +6,11 @@ export const SxBackdropCustom: SxProps<Theme> = (theme) => ({
 });
 
 export const SxIconContainer: SxProps<Theme> = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: 2,
   padding: "1rem 2rem"
 };
 

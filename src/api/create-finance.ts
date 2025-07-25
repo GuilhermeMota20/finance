@@ -13,7 +13,6 @@ export const useCreateFinanceApi = () => {
       });
       return { success: true };
     } catch (error) {
-      console.error('Erro ao criar finance:', error);
       return { success: false, error: "Não foi possível salvar o registro! Por favor, tente novamente." };
     };
   };
