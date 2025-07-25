@@ -8,6 +8,7 @@ import { SnackbarProvider } from 'notistack';
 import { RouterProvider } from 'react-router-dom';
 import { AuthContextProvider } from './context/AuthContext';
 import { ProviderTheme } from './theme/providerTheme';
+import { Analytics } from "@vercel/analytics/react"
 
 export function App() {
 	const { router } = useRouter();
@@ -27,6 +28,8 @@ export function App() {
 					</ProviderTheme>
 				</LocalizationProvider>
 			</AuthContextProvider>
+
+			<Analytics />
 		</>
 	);
 }
