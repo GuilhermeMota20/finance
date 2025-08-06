@@ -79,8 +79,6 @@ export const ModalNewFinance: React.FC = () => {
         data: new Date(parseDateFirestoreToDate(selectedFinance.data)!)
       });
     };
-
-    console.log('selectedFinance', selectedFinance);
   }, [selectedFinance]);
 
   return (
