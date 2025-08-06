@@ -2,7 +2,7 @@ import * as yup from "yup";
 import { FieldCategoriaType, FieldMetodoPagamentoType, FieldTipoType } from "./types";
 
 export const newFinanceSchema = yup.object().shape({
-  id: yup.string().nullable().optional(),
+  id: yup.string().optional(),
   descricao: yup.string().required("Descrição é obrigatória"),
   tipo: yup
     .mixed<FieldTipoType>()
@@ -15,5 +15,5 @@ export const newFinanceSchema = yup.object().shape({
   metodoPagamento: yup
     .mixed<FieldMetodoPagamentoType>()
     .required("Método de pagamento é obrigatório"),
-  observacoes: yup.string().nullable().optional(), // yup.string().default(""),
+  observacoes: yup.string().optional(),
 });
