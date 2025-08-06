@@ -10,7 +10,7 @@ export interface NavigationItem {
 };
 
 export type GlobalsModalType = {
-  selectedFinance: NewFinanceType & {id?: string} | undefined;
+  selectedFinance: NewFinanceType | undefined;
   setSelectedFinance: (data: NewFinanceType | undefined) => void;
 
   isOpenNewFinance: boolean;

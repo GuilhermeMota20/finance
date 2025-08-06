@@ -7,9 +7,11 @@ export const useCreateFinanceApi = () => {
 
   const createFinance = async (userUid: string, data: NewFinanceType) => {
     try {
+      const { id, ...dataWithoutId } = data;
+
       await addDoc(financeCollection, {
         userUid,
-        ...data,
+        ...dataWithoutId,
       });
       return { success: true };
     } catch (error) {
