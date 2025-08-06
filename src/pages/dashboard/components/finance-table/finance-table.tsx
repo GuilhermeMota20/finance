@@ -1,5 +1,6 @@
 import { useGetAllFinanceApi } from '@api/get-all-finance';
 import { useModalGlobals } from '@hooks/useGlobalModals';
+import { Edit } from '@mui/icons-material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Box, IconButton } from '@mui/material';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
@@ -12,15 +13,11 @@ import { SxDataGrid } from './styles';
 
 export const FinanceTable = () => {
   const { allFinances } = useGetAllFinanceApi();
-  const { onOpenDeleteFinance, setSelectedFinance } = useModalGlobals();
-
-  const handleSelectedFinance = (data: NewFinanceType | undefined) => {
-    onOpenDeleteFinance();
-    setSelectedFinance(data);
-  };
+  const { onOpenDeleteFinance, onOpenNewFinance, setSelectedFinance } = useModalGlobals();
 
   const columns: GridColDef<NewFinanceType>[] = [
     { field: 'descricao', headerName: 'Descrição', flex: 1 },
+    { field: 'observacoes', headerName: 'Observações', flex: 1 },
     { field: 'categoria', headerName: 'Categoria', flex: 1 },
     { field: 'metodoPagamento', headerName: 'Método de pagamento', flex: 1 },
     { field: 'tipo', headerName: 'Tipo', flex: 1 },
@@ -50,9 +47,22 @@ export const FinanceTable = () => {
           <IconButton
             size="small"
             color="error"
-            onClick={() => handleSelectedFinance(params?.row)}
+            onClick={() => {
+              onOpenDeleteFinance();
+              setSelectedFinance(params?.row);
+            }}
           >
             <DeleteIcon />
+          </IconButton>
+          <IconButton
+            size="small"
+            color="info"
+            onClick={() => {
+              onOpenNewFinance();
+              setSelectedFinance(params?.row);
+            }}
+          >
+            <Edit />
           </IconButton>
         </Box>
       ),
