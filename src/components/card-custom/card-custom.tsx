@@ -1,18 +1,23 @@
 import { ExpandMore } from "@mui/icons-material";
-import { Accordion, AccordionDetails, AccordionSummary, Typography } from "@mui/material";
-import type { CardCustomProps } from "./types";
+import { Accordion, AccordionDetails, AccordionSummary, Card, CardContent, CardHeader, Typography } from "@mui/material";
 import { AnimationIn } from "../animation-in";
+import type { CardCustomProps } from "./types";
 
 export const CardCustom: React.FC<CardCustomProps> = ({
   title,
   children,
-  expanded = false
+  expanded = true
 }) => {
   if (expanded) return (
     <AnimationIn>
-      <Accordion expanded={expanded} >
-        <AccordionSummary >
-          <Typography component="span">{title}</Typography>
+      <Accordion defaultExpanded >
+        <AccordionSummary expandIcon={<ExpandMore />}>
+          <Typography
+            fontSize={18}
+            fontWeight='bold'
+          >
+            {title}
+          </Typography>
         </AccordionSummary>
 
         <AccordionDetails>
@@ -25,15 +30,13 @@ export const CardCustom: React.FC<CardCustomProps> = ({
   return (
     <>
       <AnimationIn>
-        <Accordion defaultExpanded >
-          <AccordionSummary expandIcon={<ExpandMore />} >
-            <Typography component="span">{title}</Typography>
-          </AccordionSummary>
+        <Card>
+          <CardHeader title={title} />
 
-          <AccordionDetails>
+          <CardContent>
             {children}
-          </AccordionDetails>
-        </Accordion>
+          </CardContent>
+        </Card>
       </AnimationIn>
     </>
   )
