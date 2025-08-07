@@ -1,23 +1,3 @@
-// export const colors = {
-//   primary: {
-//     main: "#00376c",
-//     light: "#4f5f8d",
-//     dark: "#0B2741",
-//     contrastText: "#fff",
-//   },
-//   secondary: {
-//     main: "#6B0057",
-//     light: "#FFAAEF",
-//     dark: "#410B37",
-//     contrastText: "#fff",
-//   },
-//   darkMode: {
-//     main: "#848A9C",
-//     light: "#34495E",
-//     dark: "#1F2A38",
-//     contrastText: "#fff",
-//   },
-// };
 export const colors = {
   primary: {
     main: "#2d6a4f",
@@ -26,9 +6,9 @@ export const colors = {
     contrastText: "#f2e8cf",
   },
   secondary: {
-    main: "#6B0057",
-    light: "#FFAAEF",
-    dark: "#410B37",
+    main: "#15616D",       // azul petróleo
+    light: "#4392F1",      // azul claro vivo
+    dark: "#0B3C49",       // azul escuro
     contrastText: "#f2e8cf",
   },
   darkMode: {

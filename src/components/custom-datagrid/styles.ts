@@ -12,3 +12,17 @@ export const SxDataGrid: SxProps<Theme> = (theme) => ({
     backgroundColor: theme.palette.action.hover,
   },
 });
+
+export const SxDataGridFilter: SxProps<Theme> = {
+  '& .MuiDrawer-paper': {
+    width: { xs: '100%', sm: 400 },
+    padding: 2,
+    boxSizing: 'border-box',
+  }
+};
+
+export const SxDataGridFilterClose: SxProps<Theme> = {
+  position: 'absolute',
+  top: 2,
+  right: 2,
+};

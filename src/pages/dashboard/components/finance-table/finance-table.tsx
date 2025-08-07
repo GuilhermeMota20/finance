@@ -1,15 +1,14 @@
 import { useGetAllFinanceApi } from '@api/get-all-finance';
+import { CustomDataGrid } from '@components/custom-datagrid';
 import { useModalGlobals } from '@hooks/useGlobalModals';
 import { Edit } from '@mui/icons-material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Box, IconButton } from '@mui/material';
-import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
-import { ptBR } from '@mui/x-data-grid/locales';
+import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { NewFinanceType } from '@pages/dashboard/types';
 import { formatDateBR } from '@utils/format-date-to-br';
 import { getDateValue } from '@utils/get-date-value';
 import { maskCurrencyBRL } from '@utils/mask-currency-brl';
-import { SxDataGrid } from './styles';
 
 export const FinanceTable = () => {
   const { allFinances } = useGetAllFinanceApi();
@@ -26,7 +25,6 @@ export const FinanceTable = () => {
       headerName: 'Valor (R$)',
       type: 'number',
       flex: 1,
-      // valueGetter: (value) => getCurrencyValue(value),
       valueFormatter: (value) => maskCurrencyBRL(value),
     },
     {
@@ -56,7 +54,7 @@ export const FinanceTable = () => {
           </IconButton>
           <IconButton
             size="small"
-            color="info"
+            color="secondary"
             onClick={() => {
               onOpenNewFinance();
               setSelectedFinance(params?.row);
@@ -70,23 +68,8 @@ export const FinanceTable = () => {
   ];
 
   return (
-    <DataGrid
-      rows={allFinances}
-      columns={columns}
-      pageSizeOptions={[5, 10, 15, 25, 50]}
-      disableRowSelectionOnClick
-      pagination
-      initialState={{
-        pagination: {
-          paginationModel: {
-            pageSize: 5,
-          },
-        },
-      }}
-      localeText={{
-        ...ptBR.components.MuiDataGrid.defaultProps.localeText,
-      }}
-      sx={SxDataGrid}
-    />
+    <>
+      <CustomDataGrid rows={allFinances} columns={columns} />
+    </>
   );
 };

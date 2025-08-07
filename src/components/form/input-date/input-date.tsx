@@ -28,7 +28,7 @@ export const InputDate = (props: Props) => {
 
   if (!control) {
     return (
-      <Element size={propsElement}>
+      <Element>
         <FormControl fullWidth size={`${props.size ?? 'small'}`}>
           <DatePicker
             {...rest}
@@ -71,10 +71,11 @@ export const InputDate = (props: Props) => {
           slotProps={{
             textField: {
               size: 'small',
-              variant: 'filled',
+              variant: 'outlined',
               color: 'primary',
               fullWidth: true,
               error,
+              autoComplete: 'off',
               inputRef: field.ref,
               onBlur: (e: FocusEvent<HTMLInputElement>) => {
                 field.onBlur();

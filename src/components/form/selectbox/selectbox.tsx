@@ -48,7 +48,7 @@ export const SelectBox = (props: Props) => {
 
   if (!props.control) {
     return (
-      <Element size={propsElement}>
+      <Element>
         <FormControl fullWidth size={`${props.size ?? 'small'}`}>
           <InputLabel id={`label-${props.name}`}>{props.label}</InputLabel>
           <Select labelId={`label-${props.name}`} {...rest}>
@@ -75,7 +75,7 @@ export const SelectBox = (props: Props) => {
         </InputLabel>
         <Select
           {...rest}
-          variant='filled'
+          variant='outlined'
           color='primary'
           error={!!formState?.errors?.[`${props?.name}`]?.message}
           labelId={`label-${props.name}`}

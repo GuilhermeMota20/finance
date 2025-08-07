@@ -1,13 +1,11 @@
+import { CardCustom } from '@components/card-custom';
 import { useAuth } from '@context/AuthContext';
 import GoogleIcon from '@mui/icons-material/Google';
 import {
   Alert,
   Button,
-  Card,
-  CardContent,
   Grid,
-  Stack,
-  Typography
+  Stack
 } from "@mui/material";
 
 export const Login = () => {
@@ -16,36 +14,30 @@ export const Login = () => {
   return (
     <>
       <Stack alignItems={"center"}>
-        <Card sx={{ width: "90%", maxWidth: "500px" }}>
-          <CardContent>
-            <Grid container spacing={2} >
-              <>
-                {loginError ? (
-                  <Grid size={{ xs: 12 }}>
-                    <Alert severity="error">Usuário ou senha inválidos</Alert>
-                  </Grid>
-                ) : null}
-              </>
+        <CardCustom title='Login' expanded={false}>
+          <Grid container spacing={2} >
+            <>
+              {loginError ? (
+                <Grid size={{ xs: 12 }}>
+                  <Alert severity="error">Usuário ou senha inválidos</Alert>
+                </Grid>
+              ) : null}
+            </>
 
-              <Grid size={{ xs: 12 }}>
-                <Typography variant={"h5"}>Login</Typography>
-              </Grid>
-
-              <Grid size={{ xs: 12 }}>
-                <Button
-                  fullWidth
-                  variant="contained"
-                  startIcon={<GoogleIcon />}
-                  onClick={SignInWithGoogle}
-                  loading={loading}
-                  disabled={loading}
-                >
-                  {loading ? "Carregando..." : "Entrar com Google"}
-                </Button>
-              </Grid>
+            <Grid size={{ xs: 12 }}>
+              <Button
+                fullWidth
+                variant="contained"
+                startIcon={<GoogleIcon />}
+                onClick={SignInWithGoogle}
+                loading={loading}
+                disabled={loading}
+              >
+                {loading ? "Carregando..." : "Entrar com Google"}
+              </Button>
             </Grid>
-          </CardContent>
-        </Card>
+          </Grid>
+        </CardCustom>
       </Stack>
     </>
   );

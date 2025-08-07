@@ -49,7 +49,8 @@ export const AppBarCustom: React.FC<AppBarCustomProps> = () => {
           <AppBar
             position="fixed"
             color="transparent"
-            sx={SxAppBarCustom(0, theme)}          >
+            sx={SxAppBarCustom(0, theme)}
+          >
             <Toolbar >
               <Logo />
 

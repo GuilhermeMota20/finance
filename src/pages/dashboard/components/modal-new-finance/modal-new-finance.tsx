@@ -65,7 +65,7 @@ export const ModalNewFinance: React.FC = () => {
 
   const actionsModal = (
     <>
-      <Button onClick={handleOnCloseNewFinance}>Cancelar</Button>
+      <Button onClick={handleOnCloseNewFinance} variant="contained" color="secondary">Cancelar</Button>
       <Button type="submit" variant="contained" color="primary">
         {`${isEdit ? 'Editar' : 'Registrar'}`}
       </Button>
