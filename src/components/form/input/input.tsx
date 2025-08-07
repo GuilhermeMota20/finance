@@ -53,8 +53,8 @@ export const Input = (props: Props) => {
 
   if (!props.control) {
     return (
-      <Element size={propsElement}>
-        <TextField size="small" variant='filled' fullWidth {...rest} />
+      <Element>
+        <TextField size="small" variant='outlined' fullWidth {...rest} autoComplete='off' />
       </Element>
     );
   }
@@ -68,7 +68,8 @@ export const Input = (props: Props) => {
     <Element size={propsElement}>
       <TextField
         size="small"
-        variant='filled'
+        variant='outlined'
+        autoComplete='off'
         fullWidth
         {...rest}
         onChange={(e) => field?.onChange(handleMask(e?.target?.value))}
