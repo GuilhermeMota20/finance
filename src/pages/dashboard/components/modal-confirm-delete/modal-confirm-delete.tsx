@@ -22,7 +22,7 @@ export const ModalConfirmDelete: React.FC = () => {
 
   const actionsModal = (
     <>
-      <Button onClick={onCloseDeleteFinance}>Cancelar</Button>
+      <Button onClick={onCloseDeleteFinance} variant="contained" color="secondary">Cancelar</Button>
       <Button onClick={handleDelete} variant="contained" color="error">
         Confirmar
       </Button>
