@@ -24,6 +24,7 @@ import { CustomDataGridProps } from './types';
 export function CustomDataGrid<T extends GridValidRowModel>({
   rows,
   columns,
+  hiddenFields = ['actions']
 }: CustomDataGridProps<T>) {
   const [openDrawerFilter, setOpenDrawerFilter] = useState(false);
   const [filters, setFilters] = useState<Record<string, string>>({});
@@ -114,7 +115,7 @@ export function CustomDataGrid<T extends GridValidRowModel>({
 
         <Grid container spacing={2}>
           {columns
-            .filter((col) => col.field !== 'actions')
+            .filter((col) => !hiddenFields.includes(col.field))
             .map((col) => (
               <Grid size={12} key={col.field}>
                 <Input
@@ -147,12 +148,14 @@ export function CustomDataGrid<T extends GridValidRowModel>({
               }
               sx={{ minWidth: 300 }}
             >
-              {columns.map((col) => (
-                <MenuItem key={col.field} value={col.field}>
-                  <Checkbox checked={visibleColumns.includes(col.field)} />
-                  {col.headerName ?? col.field}
-                </MenuItem>
-              ))}
+              {columns
+                .filter((col) => !hiddenFields.includes(col.field))
+                .map((col) => (
+                  <MenuItem key={col.field} value={col.field}>
+                    <Checkbox checked={visibleColumns.includes(col.field)} />
+                    {col.headerName ?? col.field}
+                  </MenuItem>
+                ))}
             </SelectBox>
           </Grid>
 
