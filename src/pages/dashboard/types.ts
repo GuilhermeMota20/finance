@@ -14,6 +14,11 @@ export type financeBarChartObject = {
   saldo: number[];
 };
 
+export type FinanceMonthOption = {
+  label: string;
+  value: string;
+};
+
 export type NewFinanceType = yup.InferType<typeof newFinanceSchema>;
 
 export type FieldTipoType = "ENTRADA" | "SAIDA";

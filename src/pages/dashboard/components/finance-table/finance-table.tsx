@@ -1,4 +1,3 @@
-import { useGetAllFinanceApi } from '@api/get-all-finance';
 import { CustomDataGrid } from '@components/custom-datagrid';
 import { useModalGlobals } from '@hooks/useGlobalModals';
 import { Edit } from '@mui/icons-material';
@@ -10,8 +9,11 @@ import { formatDateBR } from '@utils/format-date-to-br';
 import { getDateValue } from '@utils/get-date-value';
 import { maskCurrencyBRL } from '@utils/mask-currency-brl';
 
-export const FinanceTable = () => {
-  const { allFinances } = useGetAllFinanceApi();
+type Props = {
+  allFinances: NewFinanceType[];
+};
+
+export const FinanceTable: React.FC<Props> = ({ allFinances }) => {
   const { onOpenDeleteFinance, onOpenNewFinance, setSelectedFinance } = useModalGlobals();
 
   const columns: GridColDef<NewFinanceType>[] = [

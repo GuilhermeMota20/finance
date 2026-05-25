@@ -2,18 +2,24 @@ import { useGetFinancePieChartApi } from "@api/get-finance-pie-chart";
 import { CardCustom } from "@components/card-custom";
 import { PieChartCustom } from "@components/pie-chart-custom/pie-chart-custom";
 import { Grid } from "@mui/material";
+import { NewFinanceType } from "@pages/dashboard/types";
 import { colors } from "@theme/colors";
 
-export const GridDeadline: React.FC = () => {
+type Props = {
+  allFinances: NewFinanceType[];
+  selectedMonth?: string;
+};
+
+export const GridDeadline: React.FC<Props> = ({ allFinances, selectedMonth }) => {
   const colorsPallet = [
     colors?.primary?.main,
     colors?.primary?.light,
     colors?.primary?.dark,
   ];
 
-  const { chartData: categorias } = useGetFinancePieChartApi("categoria", colorsPallet);
-  const { chartData: tipos } = useGetFinancePieChartApi("tipo", colorsPallet);
-  const { chartData: metodos } = useGetFinancePieChartApi("metodoPagamento", colorsPallet);
+  const { chartData: categorias } = useGetFinancePieChartApi(allFinances, "categoria", selectedMonth, colorsPallet);
+  const { chartData: tipos } = useGetFinancePieChartApi(allFinances, "tipo", selectedMonth, colorsPallet);
+  const { chartData: metodos } = useGetFinancePieChartApi(allFinances, "metodoPagamento", selectedMonth, colorsPallet);
 
   return (
     <>
