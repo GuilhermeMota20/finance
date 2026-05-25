@@ -1,10 +1,16 @@
 import { useGetFinanceBarChartApi } from '@api/get-finance-bar-chart';
 import { BarChartCustom } from '@components/bar-chart-custom';
-import { colors as colorsCustom } from '@theme/colors';
 import { colors } from '@mui/material';
+import { NewFinanceType } from '@pages/dashboard/types';
+import { colors as colorsCustom } from '@theme/colors';
 
-export const ChartBarFinance: React.FC = () => {
-  const { chartData } = useGetFinanceBarChartApi();
+type Props = {
+  allFinances: NewFinanceType[];
+  selectedMonth?: string;
+};
+
+export const ChartBarFinance: React.FC<Props> = ({ allFinances, selectedMonth }) => {
+  const { chartData } = useGetFinanceBarChartApi(allFinances, selectedMonth);
   const { xAxis, entradas, saidas, saldo } = chartData;
 
   const seriesBaseConfig = {

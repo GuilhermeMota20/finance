@@ -1,64 +1,41 @@
 import { LabelsType, PieChartRawData } from '@components/pie-chart-custom/types';
-import { useAuth } from '@context/AuthContext';
-import { db } from '@service/firebase';
-import { collection, onSnapshot, query, where } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
+import { NewFinanceType } from '@pages/dashboard/types';
+import { filterFinancesByMonth, parseFinanceValue } from '@utils/finance-filters';
+import { useMemo } from 'react';
 
-type GroupByType = "categoria" | "tipo" | "metodoPagamento";
+type GroupByType = 'categoria' | 'tipo' | 'metodoPagamento';
 
 export const useGetFinancePieChartApi = (
+  allFinances: NewFinanceType[],
   groupBy: GroupByType,
+  selectedMonth?: string,
   colorsValues: string[] = []
 ) => {
-  const [chartData, setChartData] = useState<PieChartRawData>({
-    labels: [],
-    total: 0,
-  });
+  const chartData = useMemo<PieChartRawData>(() => {
+    const groupCount = new Map<string, number>();
+    let total = 0;
 
-  const { user } = useAuth();
-  const financeCollection = collection(db, 'finance');
+    filterFinancesByMonth(allFinances, selectedMonth).forEach((data) => {
+      const groupKey = (data[groupBy] as string) || 'OUTROS';
+      const value = parseFinanceValue(data.valor);
 
-  useEffect(() => {
-    if (!user?.uid) return;
-
-    const filters = [where('userUid', '==', user.uid)];
-    const pieQuery = query(financeCollection, ...filters);
-
-    const unsubscribe = onSnapshot(pieQuery, (querySnapshot) => {
-      const groupCount = new Map<string, number>();
-      let total = 0;
-
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
-
-        // Determina qual campo usar no agrupamento
-        const groupKey = (data[groupBy] as string) || "OUTROS";
-
-        // Converte para número (em reais)
-        const value =
-          parseFloat(data.valor.replace(/[^\d,]/g, '').replace(',', '.')) || 0;
-
-        total += value;
-        groupCount.set(groupKey, (groupCount.get(groupKey) || 0) + value);
-      });
-
-      // Monta os labels com cor e porcentagem
-      const labels: LabelsType[] = Array.from(groupCount.entries()).map(
-        ([label, quantity], index) => ({
-          label,
-          quantity,
-          percent: total > 0 ? (quantity / total) * 100 : 0,
-          color: colorsValues.length
-            ? colorsValues[index % colorsValues.length]
-            : undefined,
-        })
-      );
-
-      setChartData({ labels, total });
+      total += value;
+      groupCount.set(groupKey, (groupCount.get(groupKey) || 0) + value);
     });
 
-    return () => unsubscribe();
-  }, [user?.uid, groupBy, colorsValues]);
+    const labels: LabelsType[] = Array.from(groupCount.entries()).map(
+      ([label, quantity], index) => ({
+        label,
+        quantity,
+        percent: total > 0 ? (quantity / total) * 100 : 0,
+        color: colorsValues.length
+          ? colorsValues[index % colorsValues.length]
+          : undefined,
+      })
+    );
+
+    return { labels, total };
+  }, [allFinances, colorsValues, groupBy, selectedMonth]);
 
   return { chartData };
 };
